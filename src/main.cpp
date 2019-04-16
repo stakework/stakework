@@ -2120,21 +2120,11 @@ double ConvertBitsToDouble(unsigned int nBits)
 int64_t GetBlockValue(int nHeight)
 {
     int64_t nSubsidy = 0;
-	if (nHeight >= 1 && nHeight <= 5) {
-        nSubsidy = 10000 * COIN;
-    } else if (nHeight >= 6 && nHeight <= 10) {
-        nSubsidy = 1500 * COIN;
-    } else if (nHeight >= 11 && nHeight <= 105 ) {
-        nSubsidy = 500 * COIN;
-    } else if (nHeight >= 106 && nHeight <= 40000){
-        nSubsidy = 10 * COIN;
-    } else if (nHeight >= 40001 && nHeight <= 80000){
-        nSubsidy = 8 * COIN;
-    } else if (nHeight >= 80001 && nHeight <= 120000){
-        nSubsidy = 6 * COIN;
-    } else if (nHeight >= 120001 && nHeight <= 160000){
-        nSubsidy = 4 * COIN;
-    } else if (nHeight >= 160001 ){
+	if (nHeight >= 1 && nHeight <= 15) {
+        nSubsidy = 50000 * COIN;
+    } else if (nHeight <= Params().LAST_POW_BLOCK()) {
+        nSubsidy = 1000 * COIN;
+    } else {
         nSubsidy = 2 * COIN;
     }
     return nSubsidy;
@@ -2146,7 +2136,7 @@ int64_t GetMasternodePayment(int nHeight, int64_t blockValue, int nMasternodeCou
     int64_t ret = 0;
 
     if (Params().NetworkID() == CBaseChainParams::TESTNET) {
-        if (nHeight <= 220)
+        if (nHeight <= Params().LAST_POW_BLOCK())
             return 0;
     }
 
@@ -3194,7 +3184,7 @@ bool ConnectBlock(const CBlock& block, CValidationState& state, CBlockIndex* pin
 
     //PoW: premine in block one, only fees after that. PoS: CoinStake plus fees.
     CAmount nExpectedMint = GetBlockValue(pindex->pprev->nHeight);
-    if (block.IsProofOfWork() && pindex->nHeight > 220)
+    if (block.IsProofOfWork() && pindex->nHeight > Params().LAST_POW_BLOCK())
     {
         nExpectedMint = nFees;
     } else if (block.IsProofOfStake()) 
