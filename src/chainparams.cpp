@@ -103,92 +103,103 @@ public:
          * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
          * a large 4-byte int at any alignment.
          */
-        pchMessageStart[0] = 0xd0;              
-        pchMessageStart[1] = 0x67;              
-        pchMessageStart[2] = 0x73;              
-        pchMessageStart[3] = 0x68;
-        vAlertPubKey = ParseHex("09cc24ab003c828cdd9cf4eb2ebbde8esdfsdfsdsdfsdfsfsdfsdf1cecb3bbfa8b3127fcb9dd9b84d44112080827ed7c49a648af9fe788ff42e316aee665879c553f099e55299d6b54edd7e0");
-        nDefaultPort = 20202;                   
+	        networkID = CBaseChainParams::MAIN;
+        strNetworkID = "main";
+        /**
+         * The message start string is designed to be unlikely to occur in normal data.
+         * The characters are rarely used upper ASCII, not valid as UTF-8, and produce
+         * a large 4-byte int at any alignment.
+         */
+        pchMessageStart[0] = 0xd2;
+        pchMessageStart[1] = 0x2d;
+        pchMessageStart[2] = 0x1c;
+        pchMessageStart[3] = 0xe5;
+        vAlertPubKey = ParseHex("04cc24ab003c828cdd9cf4db2ebbde8esdfsdfsdsdfsdfsfsdfsdf1cecb3bbfa8b3127fcb9dd9b84d44112080827ed7c49a648af9fe788ff42e316aee665879c553f099e55299d6b54edd7e0");
+        nDefaultPort = 19220;
         bnProofOfWorkLimit  = (~uint256(0) >> 16);
-        bnProofOfStakeLimit = (~uint256(0) >> 20); 
+        bnProofOfStakeLimit = (~uint256(0) >> 20);
         nSubsidyHalvingInterval = 210000;       // Halving interval
-        nMaxReorganizationDepth = 100;          
-        nEnforceBlockUpgradeMajority = 750;     
-        nRejectBlockOutdatedMajority = 950;     
-        nToCheckBlockUpgradeMajority = 1000;    
+        nMaxReorganizationDepth = 100;
+        nEnforceBlockUpgradeMajority = 750;
+        nRejectBlockOutdatedMajority = 950;
+        nToCheckBlockUpgradeMajority = 1000;
         nMinerThreads = 0;                          // Obsolete (**TODO**)
         nTargetTimespanMidas = 7 * 24 * 60 * 60;    // 1 week
         nTargetTimespanDGW = 1 * 60;                // 1 day
-        nTargetSpacing = 1 * 64;                    // 1 minute
-        nMaturity = 60;                             // Block maturity   
+        nTargetSpacing = 32;                    // 1 minute
+        nMaturity = 60;                             // Block maturity
         nMasternodeCountDrift = 20;
         nMaxMoneyOut = 21000000 * COIN;
 
         /** Height or Time Based Activations **/
-        nLastPOWBlock = 105;                         // PoW Phase 3 End
+        nLastPOWBlock = 315;                         // PoW Phase 3 End
+        nStakeValue = 1000*COIN;
         nMidasStartHeight = 55550000;                   // MIDAS startheight, first big attack
         nMidasStartTime = 1837631395;                 // Time when MIDAS started and old algorithm stopped
         nDGWStartHeight = 55550000;                     // Startheight of DGW
-        nDGWStartTime = 1837631395;              // GMT: Saturday, March 24, 2018 12:27:45 AM - Exact time when DGW algorithm starts and old MIDAS stops
-        nZerocoinStartHeight = 55550000;                // Zerocoin start height, starts together with DGW
-        nZerocoinStartTime = 1837631395;             // GMT: Saturday, March 24, 2018 12:27:45 AM, 
+        nDGWStartTime = 1837631395;              
+                nZerocoinStartHeight = 55550000;                // Zerocoin start height, starts together with DGW
+        nZerocoinStartTime = 1837631395;             // GMT: Saturday, March 24, 2018 12:27:45 AM,
         nBlockEnforceSerialRange = 550137;            // Enforce serial range starting this block
         nBlockRecalculateAccumulators = 550137;       // Trigger a recalculation of accumulators
         nBlockFirstFraudulent = 99999999;             // 1110; //First block that bad serials emerged (currently we do not have any) *** TODO ***
         nBlockLastGoodCheckpoint = 55550137;            // Last valid accumulator checkpoint (currently we do not have any) *** TODO ***
         nBlockEnforceInvalidUTXO = 55550137;            // Start enforcing the invalid UTXO's's
 
-        /**
-         * Build the genesis block. Note that the output of the genesis coinbase cannot
-         * be spent as it did not originally exist in the database.
-         *
-         * CBlock(hash=00000ffd590b14, ver=1, hashPrevBlock=00000000000000, hashMerkleRoot=e0028e, nTime=1390095618, nBits=1e0ffff0, nNonce=28917698, vtx=1)
-         *   CTransaction(hash=e0028e, ver=1, vin.size=1, vout.size=1, nLockTime=0)
-         *     CTxIn(COutPoint(000000, -1), coinbase 04ffff001d01044c5957697265642030392f4a616e2f3230313420546865204772616e64204578706572696d656e7420476f6573204c6976653a204f76657273746f636b2e636f6d204973204e6f7720416363657074696e6720426974636f696e73)
-         *     CTxOut(nValue=50.00000000, scriptPubKey=0xA9037BAC7050C479B121CF)
-         *   vMerkleTree: e0028e
-         */
-        const char* pszTimestamp = "SKW means GAther rubbiSH. We want a much more green world 09/27/18";
-        genesis.nTime = 1538057827;                                         // GMT: Thursday, February 2, 2017 2:30:00 PM
+        const char* pszTimestamp = "House launches probe of US nuclear plan in Saudi Arabia 2019/2/20";
+        genesis.nTime = 1550644987;                                         // GMT: Thursday, February 2, 2017 2:30:00 PM
 
         CMutableTransaction txNew;
         txNew.nTime = genesis.nTime;
         txNew.vin.resize(1);
         txNew.vout.resize(1);
         txNew.vin[0].scriptSig = CScript() << 0 << CScriptNum(42) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
-        txNew.vout[0].nValue = 1 * COIN;
-	txNew.vout[0].SetEmpty();
+        txNew.vout[0].nValue = 0 * COIN;
+        txNew.vout[0].SetEmpty();
         genesis.vtx.push_back(txNew);
         genesis.hashPrevBlock = 0;
         genesis.hashMerkleRoot = genesis.BuildMerkleTree();
         genesis.nVersion = 1;
         genesis.nBits = 0x1f00ffff;
-        genesis.nNonce = 538443;
+        genesis.nNonce = 191556;
 
         hashGenesisBlock = genesis.GetHash();
-/*
-for(int ii=100000;ii<1000000;ii++) {
-	genesis.nNonce = ii;
-	printf("i=%7d, hash = %s  , root = %s\n",ii,genesis.GetHash().GetHex().c_str(),genesis.hashMerkleRoot.GetHex().c_str());
-}
-*/
+        const char* pszTimestamp = "House launches probe of US nuclear plan in Saudi Arabia 2019/2/20";
+        genesis.nTime = 1550644987;                                         // GMT: Thursday, February 2, 2017 2:30:00 PM
+
+        CMutableTransaction txNew;
+        txNew.nTime = genesis.nTime;
+        txNew.vin.resize(1);
+        txNew.vout.resize(1);
+        txNew.vin[0].scriptSig = CScript() << 0 << CScriptNum(42) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
+        txNew.vout[0].nValue = 0 * COIN;
+        txNew.vout[0].SetEmpty();
+        genesis.vtx.push_back(txNew);
+        genesis.hashPrevBlock = 0;
+        genesis.hashMerkleRoot = genesis.BuildMerkleTree();
+        genesis.nVersion = 1;
+        genesis.nBits = 0x1f00ffff;
+        genesis.nNonce = 191556;
+
+        hashGenesisBlock = genesis.GetHash();
+
         assert(hashGenesisBlock == uint256("0x0000235abe5c5e69c7850d5627463f9574ccc1b83acb1d13ba1c3919e7374b71"));
         assert(genesis.hashMerkleRoot == uint256("0xea68c26883f7bc8bc1189db75bbbd415abe1ca59e6abdd4e4fc3687b3e1f6db3"));
 
         // Stakework addresses start with 'i'
-        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 38);
-        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 125);
-        base58Prefixes[SECRET_KEY] = std::vector<unsigned char>(1, 125);
+	        // BS addresses start with 'i'
+        base58Prefixes[PUBKEY_ADDRESS] = std::vector<unsigned char>(1, 0x1a);
+        base58Prefixes[SCRIPT_ADDRESS] = std::vector<unsigned char>(1, 85);
+        base58Prefixes[SECRET_KEY] = std::vector<unsigned char>(1, 153);
         base58Prefixes[EXT_PUBLIC_KEY] = boost::assign::list_of(0x04)(0x88)(0xB2)(0x1E).convert_to_container<std::vector<unsigned char> >();
         base58Prefixes[EXT_SECRET_KEY] = boost::assign::list_of(0x04)(0x88)(0xAD)(0xE4).convert_to_container<std::vector<unsigned char> >();
-        // 	BIP44 coin type is from https://github.com/satoshilabs/slips/blob/master/slip-0044.md
+        //      BIP44 coin type is from https://github.com/satoshilabs/slips/blob/master/slip-0044.md
         base58Prefixes[EXT_COIN_TYPE] = boost::assign::list_of(0x80)(0x00)(0x00)(0x77).convert_to_container<std::vector<unsigned char> >(); // (**TODO**)
 
         //convertSeed6(vFixedSeeds, pnSeed6_main, ARRAYLEN(pnSeed6_main));
-	vSeeds.push_back(CDNSSeedData("node1", "node1.stakework.com"));
-        vSeeds.push_back(CDNSSeedData("node2", "node2.stakework.com"));
-        vSeeds.push_back(CDNSSeedData("node3", "node3.stakework.com"));
+        vSeeds.push_back(CDNSSeedData("seeder", "seeder.bitstake.org"));
 
+        // BS addresses start with 'i'
 
         fMiningRequiresPeers = true;
         fAllowMinDifficultyBlocks = false;
