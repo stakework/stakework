@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Stakework-Qt Regtest
+Comment=Stakework P2P gaming related cryptocurrency - REGTEST
+Comment[fr]=Stakework regtest, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=Stakework regtest, eşten eşe kriptografik sanal para birimi
+Exec=stakework-qt --regtest %u
+Terminal=false
+Type=Application
+Icon=stakework128-regtest
+MimeType=x-scheme-handler/stakework;
+Categories=Office;Finance;

@@ -1,0 +1,1 @@
+png2icns stakework.icns stakework_16x16x32.png stakework_128x128x32.png stakework_256x256x32.png stakework_48x48x32.png stakework_512x512x32.png

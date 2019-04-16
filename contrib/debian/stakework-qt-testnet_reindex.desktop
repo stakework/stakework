@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Stakework-Qt Testnet (Reindex)
+Comment=Stakework P2P gaming related cryptocurrency - TESTNETWORK
+Comment[fr]=Stakework testnet, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=Stakework testnet, eşten eşe kriptografik sanal para birimi
+Exec=stakework-qt --testnet --reindex %u
+Terminal=false
+Type=Application
+Icon=stakework128-testnet
+MimeType=x-scheme-handler/stakework;
+Categories=Office;Finance;

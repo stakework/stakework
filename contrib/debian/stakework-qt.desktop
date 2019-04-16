@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Stakework-Qt
+Comment=Stakework P2P gaming related cryptocurrency
+Comment[fr]=Stakework, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=Stakework, eşten eşe kriptografik sanal para birimi
+Exec=stakework-qt %u
+Terminal=false
+Type=Application
+Icon=stakework128
+MimeType=x-scheme-handler/stakework;
+Categories=Office;Finance;

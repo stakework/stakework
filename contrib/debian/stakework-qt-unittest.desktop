@@ -1,0 +1,12 @@
+[Desktop Entry]
+Encoding=UTF-8
+Name=Stakework-Qt Unit test
+Comment=Stakework P2P gaming related cryptocurrency - UNITTEST
+Comment[fr]=Stakework unittest, monnaie virtuelle cryptographique pair à pair
+Comment[tr]=Stakework unittest, eşten eşe kriptografik sanal para birimi
+Exec=stakework-qt --unittest %u
+Terminal=false
+Type=Application
+Icon=stakework128-unittest
+MimeType=x-scheme-handler/stakework;
+Categories=Office;Finance;

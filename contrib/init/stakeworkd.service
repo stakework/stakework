@@ -1,0 +1,26 @@
+[Unit]
+Description=Stakework's distributed currency daemon
+After=network.target
+
+[Service]
+User=stakework
+Group=stakework
+
+Type=forking
+PIDFile=/var/lib/stakeworkd/stakeworkd.pid
+
+ExecStart=/usr/bin/stakeworkd -daemon -pid=/var/lib/stakeworkd/stakeworkd.pid \
+          -conf=/etc/stakework/Stakework.conf -datadir=/var/lib/stakeworkd
+
+ExecStop=-/usr/bin/stakework-cli -conf=/etc/stakework/Stakework.conf \
+         -datadir=/var/lib/stakeworkd stop
+
+Restart=always
+PrivateTmp=true
+TimeoutStopSec=60s
+TimeoutStartSec=2s
+StartLimitInterval=120s
+StartLimitBurst=5
+
+[Install]
+WantedBy=multi-user.target

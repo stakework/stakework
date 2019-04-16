@@ -1,0 +1,26 @@
+# /etc/conf.d/stakeworkd: config file for /etc/init.d/stakeworkd
+
+# Config file location
+#BITCOIND_CONFIGFILE="/etc/stakework/Stakework.conf"
+
+# What directory to write pidfile to?  (created and owned by $BITCOIND_USER)
+#BITCOIND_PIDDIR="/var/run/stakeworkd"
+
+# What filename to give the pidfile
+#BITCOIND_PIDFILE="${BITCOIND_PIDDIR}/stakeworkd.pid"
+
+# Where to write stakeworkd data (be mindful that the blockchain is large)
+#BITCOIND_DATADIR="/var/lib/stakeworkd"
+
+# User and group to own stakeworkd process
+#BITCOIND_USER="stakework"
+#BITCOIND_GROUP="stakework"
+
+# Path to stakeworkd executable
+#BITCOIND_BIN="/usr/bin/stakeworkd"
+
+# Nice value to run stakeworkd under
+#BITCOIND_NICE=0
+
+# Additional options (avoid -conf and -datadir, use flags above)
+BITCOIND_OPTS=""
