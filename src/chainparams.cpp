@@ -54,7 +54,7 @@ static void convertSeed6(std::vector<CAddress>& vSeedsOut, const SeedSpec6* data
 // + Contains no strange transactions
 static Checkpoints::MapCheckpoints mapCheckpoints =
     boost::assign::map_list_of
-        (       0,	uint256("0000235abe5c5e69c7850d5627463f9574ccc1b83acb1d13ba1c3919e7374b71") ); 
+        (       0,	uint256("00003eec7d3c27a05f80d14ab0346ff4c71e36b990f27f2f5f5eb4e9ecad8133") ); 
 static const Checkpoints::CCheckpointData data = {
     &mapCheckpoints,
     1034845571, // * UNIX timestamp of last checkpoint block
@@ -133,7 +133,7 @@ public:
 
         /** Height or Time Based Activations **/
         nLastPOWBlock = 315;                         // PoW Phase 3 End
-        nStakeValue = 1000*COIN;
+        //nStakeValue = 1000*COIN;
         nMidasStartHeight = 55550000;                   // MIDAS startheight, first big attack
         nMidasStartTime = 1837631395;                 // Time when MIDAS started and old algorithm stopped
         nDGWStartHeight = 55550000;                     // Startheight of DGW
@@ -164,27 +164,12 @@ public:
         genesis.nNonce = 191556;
 
         hashGenesisBlock = genesis.GetHash();
-        const char* pszTimestamp = "House launches probe of US nuclear plan in Saudi Arabia 2019/2/20";
-        genesis.nTime = 1550644987;                                         // GMT: Thursday, February 2, 2017 2:30:00 PM
 
-        CMutableTransaction txNew;
-        txNew.nTime = genesis.nTime;
-        txNew.vin.resize(1);
-        txNew.vout.resize(1);
-        txNew.vin[0].scriptSig = CScript() << 0 << CScriptNum(42) << vector<unsigned char>((const unsigned char*)pszTimestamp, (const unsigned char*)pszTimestamp + strlen(pszTimestamp));
-        txNew.vout[0].nValue = 0 * COIN;
-        txNew.vout[0].SetEmpty();
-        genesis.vtx.push_back(txNew);
-        genesis.hashPrevBlock = 0;
-        genesis.hashMerkleRoot = genesis.BuildMerkleTree();
-        genesis.nVersion = 1;
-        genesis.nBits = 0x1f00ffff;
-        genesis.nNonce = 191556;
 
         hashGenesisBlock = genesis.GetHash();
 
-        assert(hashGenesisBlock == uint256("0x0000235abe5c5e69c7850d5627463f9574ccc1b83acb1d13ba1c3919e7374b71"));
-        assert(genesis.hashMerkleRoot == uint256("0xea68c26883f7bc8bc1189db75bbbd415abe1ca59e6abdd4e4fc3687b3e1f6db3"));
+        assert(hashGenesisBlock == uint256("0x00003eec7d3c27a05f80d14ab0346ff4c71e36b990f27f2f5f5eb4e9ecad8133"));
+        assert(genesis.hashMerkleRoot == uint256("0xcf109e7727b41cb03d7850bc750b293bd9fee93e532ef36e3234174fc207f6a8"));
 
         // Stakework addresses start with 'i'
 	        // BS addresses start with 'i'
