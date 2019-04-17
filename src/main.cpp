@@ -4152,6 +4152,24 @@ bool CheckBlock(const CBlock& block, CValidationState& state, bool fCheckPOW, bo
         // Second transaction must be coinstake, the rest must not be
         if (block.vtx.empty() || !block.vtx[1].IsCoinStake())
             return state.DoS(100, error("CheckBlock() : second tx is not coinstake"));
+// FIXME :: should add check of stake_value
+/*
+        if(block.vtx[1].vin.size() != 1)
+            return state.DoS(100, error("CheckBlock() : coinstake vin is not STAKE_VALUE()"));
+        CCoinsViewCache view(pcoinsTip);
+LogPrintf("%s\n",block.vtx[1].vin[0].getHash());
+        const CCoins* coins = view.AccessCoins(block.vtx[1].vin[1].prevout.hash);
+
+        if(coins) {
+LogPrintf("coins\n");
+        } else {
+LogPrintf("null?\n");
+        }
+        CAmount nValueIn = coins->vout[block.vtx[1].vin[0].prevout.n].nValue;
+        if(nValueIn != Params().STAKE_VALUE())
+            return state.DoS(100, error("CheckBlock() : coinstake vin is not STAKE_VALUE()"));
+*/
+
         for (unsigned int i = 2; i < block.vtx.size(); i++)
             if (block.vtx[i].IsCoinStake())
                 return state.DoS(100, error("CheckBlock() : more than one coinstake"));

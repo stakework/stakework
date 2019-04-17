@@ -2079,6 +2079,9 @@ bool CWallet::SelectStakeCoins(std::set<std::pair<const CWalletTx*, unsigned int
             //check that it is matured
             if (out.nDepth < (out.tx->IsCoinStake() ? Params().COINBASE_MATURITY() : 10))
                 continue;
+	    //add to our stake set
+            if(out.tx->vout[out.i].nValue != Params().STAKE_VALUE())
+                continue;
 
             //add to our stake set
             setCoins.insert(make_pair(out.tx, out.i));
@@ -2981,7 +2984,7 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
     const CBlockIndex* pIndex0 = chainActive.Tip();
     nReward = GetBlockValue(pIndex0->nHeight);
     nCredit += nReward;
-
+/*
     CAmount nMinFee = 0;
     while (true) {
         // Set output amount
@@ -3008,10 +3011,11 @@ bool CWallet::CreateCoinStake(const CKeyStore& keystore, unsigned int nBits, int
             break;
         }
     }
-
+*/
     //Masternode payment
-    FillBlockPayee(txNew, nMinFee, true);
-
+  //  FillBlockPayee(txNew, nMinFee, true);
+    txNew.vout[1].nValue = Params().STAKE_VALUE();
+    txNew.vout[2].nValue = GetBlockValue(pIndex0->nHeight);
     // Sign
     int nIn = 0;
     BOOST_FOREACH (const CWalletTx* pcoin, vwtxPrev) {

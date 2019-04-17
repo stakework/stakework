@@ -133,6 +133,7 @@ public:
 
         /** Height or Time Based Activations **/
         nLastPOWBlock = 315;                         // PoW Phase 3 End
+	nStakeValue = 1000 * COIN;
         //nStakeValue = 1000*COIN;
         nMidasStartHeight = 55550000;                   // MIDAS startheight, first big attack
         nMidasStartTime = 1837631395;                 // Time when MIDAS started and old algorithm stopped
