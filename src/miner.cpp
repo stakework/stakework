@@ -132,6 +132,10 @@ CBlockTemplate* CreateNewBlock(const CScript& scriptPubKeyIn, CWallet* pwallet, 
         pblock->nTime &= ~STAKE_TIMESTAMP_MASK;
 
         CBlockIndex* pindexPrev = chainActive.Tip();
+        if(pindexPrev->GetBlockTime() >= pblock->nTime) {
+                return NULL;
+        }
+
         pblock->nBits = GetNextWorkRequired(pindexPrev, pblock, true);
         CMutableTransaction txCoinStake;
 	txCoinStake.nTime = pblock->nTime;        
